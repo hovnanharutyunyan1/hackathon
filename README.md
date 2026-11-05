@@ -58,4 +58,4 @@ php bin/console dbal:run-sql "SELECT i.num, i.competence, h.ville, e.nom AS equi
 
 ## Difficultés rencontrées
 
-Les premières commandes Composer ont été exécutées dans le mauvais dossier : le projet a dû être recréé. Ma clé USB étant défectueuse, j'ai aussi dû recommencer le travail commencé en classe.
+Les premières commandes Composer ont été exécutées dans le mauvais dossier. Il a donc fallu nettoyer et recréer le projet. En classe, j'avais sauvegardé mon travail sur ma clé USB afin de pouvoir le terminer à la maison. Cependant, ma clé USB étant défectueuse, j'ai dû recommencer le projet depuis le début.
