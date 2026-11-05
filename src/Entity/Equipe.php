@@ -27,6 +27,10 @@ class Equipe
     #[ORM\OneToMany(targetEntity: Inscription::class, mappedBy: 'equipe')]
     private Collection $inscriptions;
 
+    #[ORM\ManyToOne(inversedBy: 'equipes')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Projet $projet = null;
+
     public function __construct()
     {
         $this->inscriptions = new ArrayCollection();
@@ -87,6 +91,18 @@ class Equipe
                 $inscription->setEquipe(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getProjet(): ?Projet
+    {
+        return $this->projet;
+    }
+
+    public function setProjet(?Projet $projet): static
+    {
+        $this->projet = $projet;
 
         return $this;
     }
