@@ -61,6 +61,8 @@ Résultat (extrait) :
   1    2026-11-05 09:00:00   2026-11-07 18:00:00   Salle 0   Rennes         Thème numéro 0   affiche0.png   Objectifs du hackathon numéro 0  
   2    2026-11-12 09:00:00   2026-11-14 18:00:00   Salle 1   Brest          Thème numéro 1   affiche1.png   Objectifs du hackathon numéro 1  
   3    2026-11-19 09:00:00   2026-11-21 18:00:00   Salle 2   Saint-Brieuc   Thème numéro 2   affiche2.png   Objectifs du hackathon numéro 2  
+  4    2026-11-26 09:00:00   2026-11-28 18:00:00   Salle 3   Lorient        Thème numéro 3   affiche3.png   Objectifs du hackathon numéro 3  
+  5    2026-12-03 09:00:00   2026-12-05 18:00:00   Salle 4   Vannes         Thème numéro 4   affiche4.png   Objectifs du hackathon numéro 4
  ---- --------------------- --------------------- --------- -------------- ---------------- -------------- --------------------------------- 
 ```
 
