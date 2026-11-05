@@ -1,7 +1,8 @@
-# TP1 - Hackathon : mise en place de l'ORM (Doctrine)
+# TP1 - Hackathon : mise en place de l'ORM (Object Relational Mapping)
 
 ## Prérequis
-PHP 8.5, Composer, Symfony CLI, MySQL 8.4
+- PHP 8.5.4, Composer 2.9.5, Symfony CLI
+- MySQL 8.4
 
 ## Installation
 
@@ -19,22 +20,33 @@ CREATE USER 'user_hack'@'localhost' IDENTIFIED BY '[mot_de_passe]';
 GRANT ALL PRIVILEGES ON Hackathon.* TO 'user_hack'@'localhost';
 ```
 
-Créer un fichier `.env.local` (non versionné) :
+Créer un fichier `.env.local` avec :
 
 ```
 DATABASE_URL="mysql://user_hack:[mot_de_passe]@127.0.0.1:3306/Hackathon?serverVersion=8.4.0&charset=utf8mb4"
 ```
 
-Créer les tables et charger les données de test :
+Valeurs à adapter selon votre configuration.
+
+En option : créer la base si celle-ci n'existe pas
 
 ```bash
-php bin/console doctrine:migrations:migrate
-php bin/console doctrine:fixtures:load
+php bin/console doctrine:database:create
 ```
 
-## Entités (`src/Entity/`)
+## Entités
 
-Hackathon, Organisateur, Projet, Equipe, Inscription, Membre, Participant, MembreJury, Notation.
+| Entité | Attributs principaux |
+|---|---|
+| Hackathon | dateHeureDebut, dateHeureFin, lieu, ville, theme, affiche, objectifs |
+| Organisateur | statut, nom, siteWeb, email |
+| Projet | description, retenu |
+| Equipe | nom, lienPrototype |
+| Inscription | num, date, competence |
+| Membre | nom, prenom, email, telephone |
+| Participant (hérite de Membre) | dateNaissance, lienPortfolio |
+| MembreJury (hérite de Membre) | |
+| Notation | note |
 
 Relations :
 - Hackathon 1—N Inscription
@@ -46,15 +58,40 @@ Relations :
 
 Organisateur et Notation n'ont pas encore de relation.
 
-Les migrations sont dans `migrations/` et les fixtures dans `src/DataFixtures/`.
+## Fixtures
+
+Le jeu d'essai est défini dans `src/DataFixtures/` (Hackathon, Organisateur, Membre, Projet, Equipe, Inscription). Les fixtures respectent les relations : chaque projet est rattaché à un hackathon, chaque équipe à un projet, chaque inscription à un hackathon, un participant et une équipe.
+
+## Base de données et jeux d'essai (fixtures)
+
+Appliquer les migrations (dossier `migrations/`) et charger le jeu d'essai :
+
+```bash
+php bin/console doctrine:migrations:migrate
+php bin/console doctrine:fixtures:load
+```
 
 ## Test d'interrogation
+
+Requête :
 
 ```bash
 php bin/console dbal:run-sql "SELECT i.num, i.competence, h.ville, e.nom AS equipe FROM inscription i JOIN hackathon h ON h.id = i.hackathon_id LEFT JOIN equipe e ON e.id = i.equipe_id"
 ```
 
-![Résultat de la requête](docs/capture.png)
+Résultat (extrait) :
+
+```
+ ----- ------------------- -------------- --------------------- 
+  num   competence          ville          equipe               
+ ----- ------------------- -------------- --------------------- 
+  1     Développement web   Rennes         Les Hackers Bretons  
+  2     Graphisme           Brest          Code Armor           
+  3     Communication       Saint-Brieuc   Team Breizh          
+ ----- ------------------- -------------- --------------------- 
+```
+
+![Capture du résultat](docs/capture.png)
 
 ## Difficultés rencontrées
 
