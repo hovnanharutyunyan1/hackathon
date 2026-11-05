@@ -7,7 +7,7 @@
 ## Installation
 
 ```bash
-git clone [URL du dépôt]
+git clone https://github.com/hovnanharutyunyan1/hackathon.git
 cd hackathon
 composer install
 ```
