@@ -20,6 +20,10 @@ class Projet
     #[ORM\Column]
     private ?bool $retenu = null;
 
+    #[ORM\ManyToOne(inversedBy: 'projets')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Hackathon $hackathon = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -45,6 +49,18 @@ class Projet
     public function setRetenu(bool $retenu): static
     {
         $this->retenu = $retenu;
+
+        return $this;
+    }
+
+    public function getHackathon(): ?Hackathon
+    {
+        return $this->hackathon;
+    }
+
+    public function setHackathon(?Hackathon $hackathon): static
+    {
+        $this->hackathon = $hackathon;
 
         return $this;
     }
